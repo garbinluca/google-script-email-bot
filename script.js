@@ -1,4 +1,4 @@
-function sendTosano2faCodeToTelegram() {
+function send2faCodeToTelegram() {
   try {
     var searchString = 'from: example@example.com'
     var threads = GmailApp.search(searchString, 0, 1);
