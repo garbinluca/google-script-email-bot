@@ -1,7 +1,8 @@
-function send2faCodeToTelegram() {
+function send2FACodeToTelegram() {
   try {
-    var searchString = 'from: example@example.com'
-    var threads = GmailApp.search(searchString, 0, 1);
+    var scriptProperties = PropertiesService.getScriptProperties();
+
+    var threads = GmailApp.search(scriptProperties.getProperty('QUERY_STRING'), 0, 1);
 
     if (threads.length) {
       var subject = threads[0].getFirstMessageSubject();
@@ -23,7 +24,8 @@ function send2faCodeToTelegram() {
         'payload': formData
       };
 
-      UrlFetchApp.fetch('https://endpoint.com', options);
+      UrlFetchApp.fetch(scriptProperties.getProperty('WS_ENDPOINT'), options);
+
       GmailApp.moveThreadsToTrash(threads);
 
     }
